@@ -53,15 +53,33 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Pesawat</th>
-                                    <th>Bandara</th>
+                                    <th>Bandara Asal</th>
+                                    <th>Bandara Tujuan</th>
                                     <th>Jadwal</th>
                                 </tr>
                             </thead>
 
                             <tbody>
+                                @if(count($jadwal) > 0)
+
+                                @php
+                                $num = 1;
+                                @endphp
+
+                                @foreach($jadwal as $key => $value)
+                                <tr>
+                                    <td>{{ $num++ }}</td>
+                                    <td>{{ $value->nama_pesawat }}</td>
+                                    <td>{{ $value->bandara_asal }}</td>
+                                    <td>{{ $value->bandara_tujuan }}</td>
+                                    <td>{{ date('d F Y', strtotime($value->tgl_jadwal)) }}</td>
+                                </tr>
+                                @endforeach
+                                @else
                                 <tr>
                                     <td colspan="4" class="text-center">No item found baka!</td>
                                 </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
