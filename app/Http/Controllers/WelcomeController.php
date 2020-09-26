@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\JadwalPenerbangan;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
     public function index()
     {
-        return view('welcome/index');
+        $jadwal = new JadwalPenerbangan();
+
+        $data = array();
+        $data['jadwal'] = $jadwal->getJadwalPenerbangan();
+
+        return view('welcome/index', $data);
     }
 }
