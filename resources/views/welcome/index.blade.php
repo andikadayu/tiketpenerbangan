@@ -52,6 +52,24 @@
                     </div>
 
                     <div class="card-body">
+                        <form action="{{ url()->current() }}" method="GET" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Search</label>
+                                        <input type="search" name="search" class="form-control" placeholder="Search ..." value="{{ $request->get('search') }}">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label>Action</label>
+                                        <button type="submit" class="btn btn-primary btn-block">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -86,7 +104,7 @@
                                 @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="4" class="text-center">No item found baka!</td>
+                                    <td colspan="6" class="text-center">No item found baka!</td>
                                 </tr>
                                 @endif
                             </tbody>

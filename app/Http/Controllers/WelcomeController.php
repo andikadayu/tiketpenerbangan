@@ -9,16 +9,20 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
+
         $jadwal = new JadwalPenerbangan();
         $bandara = new Bandara();
         $pesawat = new Pesawat();
 
         $data = array();
-        $data['jadwal'] = $jadwal->getJadwalPenerbangan();
+        $data['jadwal'] = $jadwal->getJadwalPenerbangan($search);
         $data['bandara'] = $bandara->getDataBandara();
         $data['pesawat'] = $pesawat->getDataPesawat();
+
+        $data['request'] = $request;
 
         return view('welcome/index', $data);
     }
