@@ -80,7 +80,7 @@
                                     <td>{{ date('d F Y', strtotime($value->tgl_jadwal)) }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" onclick="editing({{$value->id_jadwal}});">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button> 
+                                        <button class="btn btn-sm btn-danger" onclick="deleting({{$value->id_jadwal}})">Delete</button> 
                                     </td>
                                 </tr>
                                 @endforeach
