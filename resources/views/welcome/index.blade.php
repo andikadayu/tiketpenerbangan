@@ -79,8 +79,8 @@
                                     <td>{{ $value->bandara_tujuan }}</td>
                                     <td>{{ date('d F Y', strtotime($value->tgl_jadwal)) }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning" onclick="editing({{$value->id_jadwal}});">Edit</button>
-                                        <button class="btn btn-sm btn-danger" onclick="deleting({{$value->id_jadwal}})">Delete</button> 
+                                        <button class="btn btn-sm btn-warning" onclick="editing(<?= $value->id_jadwal ?>);">Edit</button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleting(<?= $value->id_jadwal ?>)">Delete</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -256,20 +256,22 @@
         function editing(id) {
             $('#modalEdit').modal('show');
             $.ajax({
-                url:'getting',
-                method:'get',
-                data:{id:id},
-                success:function (data) {
+                url: 'getting',
+                method: 'get',
+                data: {
+                    id: id
+                },
+                success: function(data) {
                     $('#edit_id_jadwal').val(data[0].id_jadwal),
-                    $('#edit_select_tujuan').val(data[0].id_bandara_tujuan),
-                    $('#edit_select_asal').val(data[0].id_bandara_asal),
-                    $('#edit_select_jadwal').val(data[0].tgl_jadwal),
-                    $('#edit_select_pesawat').val(data[0].id_pesawat)
+                        $('#edit_select_tujuan').val(data[0].id_bandara_tujuan),
+                        $('#edit_select_asal').val(data[0].id_bandara_asal),
+                        $('#edit_select_jadwal').val(data[0].tgl_jadwal),
+                        $('#edit_select_pesawat').val(data[0].id_pesawat)
                 }
             });
         }
 
-        $('#frmUpdateData').submit(function (e) {
+        $('#frmUpdateData').submit(function(e) {
             e.preventDefault();
 
             let formData = new FormData(this);
@@ -299,7 +301,6 @@
             });
 
         })
-
     </script>
 </body>
 

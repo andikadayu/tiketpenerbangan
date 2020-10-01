@@ -29,13 +29,12 @@ class JadwalPenerbangan extends Model
     public function getting($id)
     {
         return DB::table('jadwal_penerbangan')
-            ->where('id_jadwal',$id)
+            ->where('id_jadwal', $id)
             ->get();
     }
 
     public function upd($id, $upd = array())
     {
-        return DB::table('jadwal_penerbangan')->where('id_jadwal',$id)->update($upd);
+        return DB::table('jadwal_penerbangan')->where('id_jadwal', $id)->update($upd);
     }
-
 }
