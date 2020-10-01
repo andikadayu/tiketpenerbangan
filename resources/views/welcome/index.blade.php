@@ -60,6 +60,7 @@
                                     <th>Bandara Asal</th>
                                     <th>Bandara Tujuan</th>
                                     <th>Jadwal</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
 
@@ -77,6 +78,10 @@
                                     <td>{{ $value->bandara_asal }}</td>
                                     <td>{{ $value->bandara_tujuan }}</td>
                                     <td>{{ date('d F Y', strtotime($value->tgl_jadwal)) }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning" onclick="editing({{$value->id_jadwal}});">Edit</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button> 
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @else
@@ -148,6 +153,64 @@
         </div>
     </div>
 
+    <!-- Update Modal -->
+    <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-label="modalAdd" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="frmUpdateData" action="{{ url()->current() . '/process_update' }}" method="POST" autocomplete="off">
+                    {{ csrf_field() }}
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update Data</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="id_jadwal" id="edit_id_jadwal">
+                        <div class="form-group">
+                            <label>Pesawat</label>
+                            <select name="pesawat" id="edit_select_pesawat" class="form-control" required>
+                                @foreach($pesawat as $key => $value)
+                                <option value="{{ $value->id_pesawat }}">{{ $value->nama_pesawat }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Asal</label>
+                            <select name="asal" id="edit_select_asal" class="form-control" required>
+                                @foreach($bandara as $key => $value)
+                                <option value="{{ $value->id_bandara }}">{{ $value->nama_bandara . ' - ' . $value->lokasi_bandara }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tujuan</label>
+                            <select name="tujuan" id="edit_select_tujuan" class="form-control" required>
+                                @foreach($bandara as $key => $value)
+                                <option value="{{ $value->id_bandara }}">{{ $value->nama_bandara . ' - ' . $value->lokasi_bandara }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Jadwal</label>
+                            <input type="date" name="jadwal" id="edit_select_jadwal" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
@@ -189,6 +252,54 @@
                 alert('Have an error! Please contact developers');
             });
         });
+
+        function editing(id) {
+            $('#modalEdit').modal('show');
+            $.ajax({
+                url:'getting',
+                method:'get',
+                data:{id:id},
+                success:function (data) {
+                    $('#edit_id_jadwal').val(data[0].id_jadwal),
+                    $('#edit_select_tujuan').val(data[0].id_bandara_tujuan),
+                    $('#edit_select_asal').val(data[0].id_bandara_asal),
+                    $('#edit_select_jadwal').val(data[0].tgl_jadwal),
+                    $('#edit_select_pesawat').val(data[0].id_pesawat)
+                }
+            });
+        }
+
+        $('#frmUpdateData').submit(function (e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            let elementsForm = $(this).find('button, select, input');
+            elementsForm.attr('disabled', true);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    elementsForm.removeAttr('disabled');
+
+                    if (response.RESULT == 'OK') {
+                        window.location.reload();
+                    } else {
+                        alert(response.MESSAGE);
+                    }
+                }
+            }).fail(function() {
+                elementsForm.removeAttr('disabled');
+
+                alert('Have an error! Please contact developers');
+            });
+
+        })
+
     </script>
 </body>
 
