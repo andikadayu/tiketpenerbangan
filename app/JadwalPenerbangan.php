@@ -19,4 +19,9 @@ class JadwalPenerbangan extends Model
 
         return $statement->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function insert($data = array())
+    {
+        return DB::table('jadwal_penerbangan')->insert($data);
+    }
 }

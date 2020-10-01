@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::post('/process_add', 'JadwalController@process_add');

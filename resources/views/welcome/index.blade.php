@@ -44,7 +44,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Data
+                        Data Jadwal Penerbangan
+
+                        <div class="float-right">
+                            <button type="button" onclick="buttonAdd();" class="btn btn-primary btn-sm">Tambah Data</button>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -88,11 +92,104 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-label="modalAdd" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="frmAddData" action="{{ url()->current() . '/process_add' }}" method="POST" autocomplete="off">
+                    {{ csrf_field() }}
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Data</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Pesawat</label>
+                            <select name="pesawat" id="select_pesawat" class="form-control" required>
+                                @foreach($pesawat as $key => $value)
+                                <option value="{{ $value->id_pesawat }}">{{ $value->nama_pesawat }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Asal</label>
+                            <select name="asal" id="select_asal" class="form-control" required>
+                                @foreach($bandara as $key => $value)
+                                <option value="{{ $value->id_bandara }}">{{ $value->nama_bandara . ' - ' . $value->lokasi_bandara }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tujuan</label>
+                            <select name="tujuan" id="select_tujuan" class="form-control" required>
+                                @foreach($bandara as $key => $value)
+                                <option value="{{ $value->id_bandara }}">{{ $value->nama_bandara . ' - ' . $value->lokasi_bandara }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Jadwal</label>
+                            <input type="date" name="jadwal" id="select_jadwal" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{{ asset('assets/js/jquery-3.2.1.slim.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+    <script>
+        function buttonAdd() {
+            $('#modalAdd').modal('show');
+        }
+
+        $('#frmAddData').submit(function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            let elementsForm = $(this).find('button, select, input');
+
+            elementsForm.attr('disabled', true);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    elementsForm.removeAttr('disabled');
+
+                    if (response.RESULT == 'OK') {
+                        window.location.reload();
+                    } else {
+                        alert(response.MESSAGE);
+                    }
+                }
+            }).fail(function() {
+                elementsForm.removeAttr('disabled');
+
+                alert('Have an error! Please contact developers');
+            });
+        });
+    </script>
 </body>
 
 </html>
