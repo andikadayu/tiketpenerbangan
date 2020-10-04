@@ -223,6 +223,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Update</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+
                     </div>
                 </form>
             </div>
@@ -319,7 +320,25 @@
             });
 
         })
+
+		function deleting(id) {
+	var del = confirm("Apakah Anda Ingin Menghapus Data ini?");
+	if (del == true) {
+		$.ajax({
+			url:'delete',
+			method:'GET',
+			data:{id:id},
+		}).done(function (data) {
+			if (data == 'success') {
+				location.reload();
+			} else {
+				alert('Terjadi Kesalahan')
+			}
+		})
+	}
+}
     </script>
+	
 </body>
 
 </html>
