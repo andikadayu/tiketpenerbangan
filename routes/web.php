@@ -17,3 +17,5 @@ Route::get('/', 'WelcomeController@index');
 Route::post('/process_add', 'JadwalController@process_add');
 Route::get('/getting', 'JadwalController@getting');
 Route::post('/process_update', 'JadwalController@process_update');
+Route::get('delete','JadwalController@delete');
+
