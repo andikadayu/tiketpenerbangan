@@ -332,7 +332,7 @@
 			if (data == 'success') {
 				location.reload();
 			} else {
-				alert('Terjadi Kesalahan')
+				alert('Terjadi Kesalahan');
 			}
 		})
 	}
