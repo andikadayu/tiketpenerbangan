@@ -73,18 +73,18 @@ class JadwalController extends Controller
                 'RESULT' => 'FAILED',
                 'MESSAGE' => 'Failed to update data to table'
             ));
+        }
+    }
 			
 	function delete(Request $request) {
-	$jadwal_model = new JadwalPenerbangan();
-	$process = $jadwal_model->del($request->get('id'));
+    	$jadwal_model = new JadwalPenerbangan();
+    	$process = $jadwal_model->del($request->get('id'));
 
-	if ($process < 0) {
-		return 'error';
-	} else {
-		return 'success';
-	}
-}
+    	if ($process < 0) {
+    		return 'error';
+    	} else {
+    		return 'success';
+    	}
 
-        }
     }
 }
