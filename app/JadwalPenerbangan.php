@@ -43,7 +43,7 @@ class JadwalPenerbangan extends Model
         return DB::table('jadwal_penerbangan')->where('id_jadwal', $id)->update($upd);
     }
 	function del($id)
-{
-	return DB::table('id_jadwal',$id)->delete();
-}
+    {
+	   return DB::table('jadwal_penerbangan')->where('id_jadwal',$id)->delete();
+    }
 }
