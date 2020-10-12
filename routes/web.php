@@ -28,6 +28,13 @@ Route::group(['middleware' => ['CekSession']], function () {
 
     Route::post('dashboard/process_update', 'JadwalController@process_update');
     Route::post('dashboard/process_add', 'JadwalController@process_add');
+
+    Route::get('pesawat', 'PesawatController@index');
+    Route::get('pesawat/add', 'PesawatController@modal_add');
+    Route::post('pesawat/add/process', 'PesawatController@process_add');
+    Route::post('pesawat/delete', 'PesawatController@process_delete');
+    Route::get('pesawat/edit', 'PesawatController@modal_edit');
+    Route::post('pesawat/edit/process', 'PesawatController@process_edit');
 });
 
 Route::get('login', 'LoginController@index');
@@ -36,6 +43,4 @@ Route::post('login/process', 'LoginController@process_login');
 Route::get('register', 'RegisterController@index');
 Route::post('register/process', 'RegisterController@process_register');
 
-
-Route::get('/','UserViewController@index');
-
+Route::get('/', 'UserViewController@index');

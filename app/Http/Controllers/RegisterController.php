@@ -42,7 +42,7 @@ class RegisterController extends Controller
         $msuser->nama = $nama;
         $msuser->username = $username;
         $msuser->password = $password;
-        $msuser->role = 'user';
+        $msuser->role = TiketPenerbangan::USER;
 
         $insert = $msuser->save();
 

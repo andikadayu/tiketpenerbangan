@@ -35,11 +35,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ url('dashboard') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
+                <?php if (isAdmin()) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ url('pesawat') }}">
+                            Data Pesawat
+                        </a>
+                    </li>
+                <?php endif; ?>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('logout') }}">Logout</a>
+                    <a class="nav-link text-white" href="{{ url('logout') }}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -48,6 +56,8 @@
     <div class="container-fluid" style="margin-top: 1rem;">
         @yield('content')
     </div>
+
+    <div id="ModalGlobal" class="modal modal-fade" tabindex="-1" role="dialog" aria-label="modalAdd" aria-hidden="true"></div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
