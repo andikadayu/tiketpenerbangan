@@ -38,6 +38,14 @@
                     <a class="nav-link text-white" href="{{ url('dashboard') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
+                @if(isAdmin())
+                     <li class="nav-item">
+                        <a class="nav-link text-white" href="{{url('bandara')}}">
+                            Data Bandara
+                        </a>
+                    </li>
+                @endif
+
                 <?php if (isAdmin()) : ?>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ url('pesawat') }}">
