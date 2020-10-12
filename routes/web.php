@@ -35,6 +35,12 @@ Route::group(['middleware' => ['CekSession']], function () {
     Route::post('pesawat/delete', 'PesawatController@process_delete');
     Route::get('pesawat/edit', 'PesawatController@modal_edit');
     Route::post('pesawat/edit/process', 'PesawatController@process_edit');
+
+    Route::get('bandara','BandaraController@index');
+    Route::post('save-bandara','BandaraController@save_bandara');
+    Route::get('get-bandara','BandaraController@get_bandara');
+    Route::post('update-bandara','BandaraController@update_bandara');
+    Route::get('delete-bandara','BandaraController@delete_bandara');
 });
 
 Route::get('login', 'LoginController@index');
