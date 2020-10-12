@@ -19,3 +19,13 @@ function isLogin()
 {
     return (Session::get('is_login') == true);
 }
+
+function isAdmin()
+{
+    return (Session::get('role') == TiketPenerbangan::ADMIN);
+}
+
+function generateIDPesawat($prefix)
+{
+    return $prefix . rand(1000, 9999);
+}
