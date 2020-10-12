@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('logout', function () {
     Auth::logout();
     Session::flush();
@@ -39,8 +35,7 @@ Route::post('login/process', 'LoginController@process_login');
 
 Route::get('register', 'RegisterController@index');
 Route::post('register/process', 'RegisterController@process_register');
-<<<<<<< HEAD
 
-Route::get('view','UserViewController@index');
-=======
->>>>>>> f3d31db4e096fdaf11ae0eb861005a1a970476e2
+
+Route::get('/','UserViewController@index');
+
