@@ -9,6 +9,8 @@ use PDO;
 class JadwalPenerbangan extends Model
 {
     protected $table = 'jadwal_penerbangan';
+    protected $primaryKey = "id_jadwal";
+    public $timestamps = false;
 
     public function getJadwalPenerbangan($like = null)
     {

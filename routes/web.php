@@ -55,3 +55,6 @@ Route::post('register/process', 'RegisterController@process_register');
 
 Route::get('/', 'UserViewController@index');
 Route::post('get_jadwal', 'JadwalController@data_jadwal');
+
+Route::post('order', 'OrderController@modal_order');
+Route::post('order/process', 'OrderController@process_order');
