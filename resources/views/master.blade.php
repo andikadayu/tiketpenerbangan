@@ -35,24 +35,31 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('dashboard') }}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="{{ url('dashboard') }}">
+                        Dashboard
+                        <span class="sr-only">(current)</span>
+                    </a>
                 </li>
 
                 @if(isAdmin())
-                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{url('bandara')}}">
-                            Data Bandara
-                        </a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('jadwal') }}">
+                        Jadwal Penerbangan
+                    </a>
+                </li>
 
-                <?php if (isAdmin()) : ?>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ url('pesawat') }}">
-                            Data Pesawat
-                        </a>
-                    </li>
-                <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{url('bandara')}}">
+                        Data Bandara
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('pesawat') }}">
+                        Data Pesawat
+                    </a>
+                </li>
+                @endif
 
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('logout') }}">Logout</a>

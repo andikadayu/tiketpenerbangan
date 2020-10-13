@@ -63,30 +63,31 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center justify-content-center text-center">
                 <div class="col-lg-10 align-self-end">
-                    <h1 class="text-uppercase text-white font-weight-bold">Your Favorite Source of Free Bootstrap Themes</h1>
+                    <h1 class="text-uppercase text-white font-weight-bold">Jadwal Tiket Penerbangan</h1>
                     <hr class="divider my-4" />
                 </div>
 
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5">Start Bootstrap can help you build better websites using the Bootstrap framework! Just download a theme and start customizing, no strings attached!</p>
-                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+                    <p class="text-white-75 font-weight-light mb-5">Tiper adalah sebuah website platform yang memberikan informasi tentang jadwal penerbangan pesawat.</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Pelajari Lebih Lanjut</a>
+                    <a class="btn btn-secondary btn-xl" href="{{ url('login') }}" style="background-color: #fff; color: #000;">Login</a>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- About-->
-    <section class="page-section bg-primary" id="about">
+    <section class="page-section" id="about" style="background-color: #0278ae;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 class="text-white mt-0">We've got what you need!</h2>
+                    <h2 class="text-white mt-0">Kami menyediakan berbagai macam tiket penerbangan ke seluruh dunia!</h2>
 
                     <hr class="divider light my-4" />
 
-                    <p class="text-white-50 mb-4">Start Bootstrap has everything you need to get your new website up and running in no time! Choose one of our open source, free to download, and easy to themes! No strings attached!</p>
+                    <p class="text-white-50 mb-4">Kami menyediakan berbagai macam tiket penerbangan dengan harga yang relatif murah yang bisa mengantarkan anda ke seluruh dunia.</p>
 
-                    <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Layanan Kami</a>
                 </div>
             </div>
         </div>
@@ -95,46 +96,54 @@
     <!-- Services-->
     <section class="page-section" id="services">
         <div class="container">
-            <h2 class="text-center mt-0">At Your Service</h2>
+            <h2 class="text-center mt-0">Layanan Kami</h2>
 
             <hr class="divider my-4" />
 
-            <div class="row">
-                <div class="col-lg-5">
-                    <select class="form-control" name="bandara_asal" id="bandara_asal">
-                        <option value="" selected disabled>--Bandara Asal--</option>
-                        @foreach($bandara as $b)
-                        <option value="{{$b->id_bandara}}">{{$b->nama_bandara}}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <form id="frmSearch" action="{{ url()->current() . '/get_jadwal' }}" method="POST" autocomplete="off">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="col-lg-5">
+                        <select class="form-control" name="bandara_asal" required>
+                            <option value="" selected disabled>-- Bandara Asal --</option>
 
-                <div class="col-lg-5">
-                    <select class="form-control" name="bandara_tujuan" id="bandara_tujuan">
-                        <option value="" selected disabled>--Bandara Tujuan--</option>
-                        @foreach($bandara as $b)
-                        <option value="{{$b->id_bandara}}">{{$b->nama_bandara}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                            @foreach($bandara as $b)
+                            <option value="{{$b->id_bandara}}">{{$b->nama_bandara}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="col-lg-2">
-                    <button class="btn btn-primary">Search</button>
+                    <div class="col-lg-5">
+                        <select class="form-control" name="bandara_tujuan" required>
+                            <option value="" selected disabled>-- Bandara Tujuan --</option>
+
+                            @foreach($bandara as $b)
+                            <option value="{{$b->id_bandara}}">{{$b->nama_bandara}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+
+                    <div class="col-md-12" id="content_result">
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
     <!-- Contact-->
-    <section class="page-section" id="contact">
+    <section class="page-section" id="contact" style="background-color: #eee;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 class="mt-0">Let's Get In Touch!</h2>
+                    <h2 class="mt-0">Kontak Kami</h2>
 
                     <hr class="divider my-4" />
 
-                    <p class="text-muted mb-5">Ready to start your next project with us? Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <p class="text-muted mb-5">Kami bersedia memberikan anda prioritas yang terbaik dengan cara menghubungi kami melalui kontak dibawah ini!</p>
                 </div>
             </div>
 
@@ -173,6 +182,37 @@
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+    <script>
+        $('#frmSearch').submit(function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            let elementsForm = $(this).find('button, select');
+
+            elementsForm.attr('disabled', true);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                dataType: 'json',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    elementsForm.removeAttr('disabled');
+
+                    if (response.RESULT == 'OK') {
+                        $('#content_result').html(response.CONTENT);
+                    }
+                }
+            }).fail(function() {
+                elementsForm.removeAttr('disabled');
+
+                alert('Have an error! Please contact developers');
+            });
+        });
+    </script>
 </body>
 
 </html>

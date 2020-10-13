@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : MySQL
 Source Server Version : 50505
 Source Host           : localhost:3306
-Source Database       : tiketpenerbangan
+Source Database       : tiketpenerbangan_update
 
 Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-10-12 13:19:21
+Date: 2020-10-13 13:11:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,18 +46,22 @@ CREATE TABLE `jadwal_penerbangan` (
   `id_bandara_asal` varchar(5) NOT NULL,
   `id_bandara_tujuan` varchar(5) NOT NULL,
   `tgl_jadwal` date NOT NULL,
+  `jam_berangkat` time NOT NULL,
+  `jam_sampai` time NOT NULL,
+  `stok` int(3) NOT NULL,
+  `tarif` int(11) NOT NULL,
   PRIMARY KEY (`id_jadwal`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of jadwal_penerbangan
 -- ----------------------------
-INSERT INTO `jadwal_penerbangan` VALUES ('1', 'A9323', 'JOG', 'MLG', '2020-09-08');
-INSERT INTO `jadwal_penerbangan` VALUES ('2', 'L1233', 'MLG', 'TRK', '2020-09-02');
-INSERT INTO `jadwal_penerbangan` VALUES ('4', 'L1233', 'MLG', 'TTE', '2020-09-30');
-INSERT INTO `jadwal_penerbangan` VALUES ('5', 'G3123', 'SUB', 'TTE', '2020-09-28');
-INSERT INTO `jadwal_penerbangan` VALUES ('6', 'L1233', 'TTE', 'TRK', '2020-09-16');
-INSERT INTO `jadwal_penerbangan` VALUES ('7', 'G3123', 'BTJ', 'BTJ', '2020-10-01');
+INSERT INTO `jadwal_penerbangan` VALUES ('1', 'A9323', 'JOG', 'MLG', '2020-09-08', '07:00:00', '10:00:00', '90', '1000000');
+INSERT INTO `jadwal_penerbangan` VALUES ('2', 'L1233', 'MLG', 'TRK', '2020-09-02', '05:00:00', '07:00:00', '75', '500000');
+INSERT INTO `jadwal_penerbangan` VALUES ('4', 'L1233', 'MLG', 'TTE', '2020-09-30', '00:30:00', '01:45:00', '23', '3400000');
+INSERT INTO `jadwal_penerbangan` VALUES ('5', 'G3123', 'SUB', 'TTE', '2020-09-28', '00:00:00', '03:00:00', '74', '890000');
+INSERT INTO `jadwal_penerbangan` VALUES ('6', 'L1233', 'TTE', 'TRK', '2020-09-16', '02:00:00', '05:00:00', '43', '2300000');
+INSERT INTO `jadwal_penerbangan` VALUES ('7', 'G3123', 'BTJ', 'BTJ', '2020-10-01', '14:00:00', '16:00:00', '100', '750000');
 
 -- ----------------------------
 -- Table structure for msuser
@@ -97,3 +101,21 @@ INSERT INTO `pesawat` VALUES ('G3123', 'Garuda');
 INSERT INTO `pesawat` VALUES ('L1233', 'Laksamana');
 INSERT INTO `pesawat` VALUES ('R1355', 'Royal');
 INSERT INTO `pesawat` VALUES ('S1343', 'Senior');
+
+-- ----------------------------
+-- Table structure for tborder
+-- ----------------------------
+DROP TABLE IF EXISTS `tborder`;
+CREATE TABLE `tborder` (
+  `id_order` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `id_jadwal` int(11) NOT NULL,
+  `tgl_pemesanan` datetime NOT NULL,
+  `jumlah_pesanan` int(11) DEFAULT NULL,
+  `tarif` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tborder
+-- ----------------------------

@@ -25,7 +25,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                       
+
                     <tbody>
                         @foreach($bandara as $b)
                         <tr>
@@ -63,37 +63,37 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col">
-                             <div class="form-group">
-                                <label>Nama Bandara</label>
-                                <input type="text" name="nama_bandara" class="form-control" required>
+                                <div class="form-group">
+                                    <label>Nama Bandara</label>
+                                    <input type="text" name="nama_bandara" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Kode Bandara</label>
+                                    <input type="text" name="id_bandara" class="form-control" style="text-transform:uppercase" required maxlength="3">
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                           <div class="form-group">
-                            <label>Kode Bandara</label>
-                            <input type="text" name="id_bandara" class="form-control" style="text-transform:uppercase" required maxlength="3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Lokasi Bandara</label>
+                                    <input type="text" name="lokasi_bandara" id="lokasi_bandara" class="form-control" style="text-transform:capitalize;" required>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                     <div class="form-group">
-                        <label>Lokasi Bandara</label>
-                        <input type="text" name="lokasi_bandara" id="lokasi_bandara" class="form-control"style="text-transform:capitalize;" required>
-                    </div> 
-                </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-
         </div>
-
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-        </div>
-    </form>
-</div>
-</div>
-</div>
+    </div>
 </div>
 <!-- Update Modal -->
 <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-label="modalAdd" aria-hidden="true">
@@ -113,43 +113,43 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col">
-                             <div class="form-group">
-                                <label>Nama Bandara</label>
-                                <input type="text" name="nama_bandara" id="edit_nama_bandara" class="form-control" required>
+                                <div class="form-group">
+                                    <label>Nama Bandara</label>
+                                    <input type="text" name="nama_bandara" id="edit_nama_bandara" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Kode Bandara</label>
+                                    <input type="text" name="id_bandara" id="edit_id_bandara" class="form-control" style="text-transform:uppercase" required maxlength="3" readonly>
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                           <div class="form-group">
-                            <label>Kode Bandara</label>
-                            <input type="text" name="id_bandara" id="edit_id_bandara" class="form-control" style="text-transform:uppercase" required maxlength="3" readonly>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Lokasi Bandara</label>
+                                    <input type="text" name="lokasi_bandara" id="edit_lokasi_bandara" class="form-control" style="text-transform:capitalize;" required>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                     <div class="form-group">
-                        <label>Lokasi Bandara</label>
-                        <input type="text" name="lokasi_bandara" id="edit_lokasi_bandara" class="form-control"style="text-transform:capitalize;" required>
-                    </div> 
-                </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-
         </div>
-
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-        </div>
-    </form>
-</div>
-</div>
-</div>
+    </div>
 </div>
 <script>
     function buttonAdd() {
         $('#modalAdd').modal('show');
     }
-     $('#save_bandara').submit(function(e) {
+    $('#save_bandara').submit(function(e) {
         e.preventDefault();
 
         let formData = new FormData(this);
@@ -183,13 +183,15 @@
     function getData(id) {
         $('#modalUpdate').modal('show');
         $.ajax({
-            url : 'get-bandara',
-            method:'get',
-            data:{id:id},
-            success:function (data) {
+            url: 'get-bandara',
+            method: 'get',
+            data: {
+                id: id
+            },
+            success: function(data) {
                 $('#edit_nama_bandara').val(data.nama_bandara),
-                $('#edit_id_bandara').val(data.id_bandara),
-                $('#edit_lokasi_bandara').val(data.lokasi_bandara)
+                    $('#edit_id_bandara').val(data.id_bandara),
+                    $('#edit_lokasi_bandara').val(data.lokasi_bandara)
             }
         })
     }
@@ -229,11 +231,13 @@
         let cf = confirm('Apakah Anda yakin ingin menghapus Data?');
         if (cf) {
             $.ajax({
-                url : 'delete-bandara',
-                method:'get',
-                dataType:'json',
-                data:{id:id},
-                success:function (response) {
+                url: 'delete-bandara',
+                method: 'get',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                success: function(response) {
                     if (response.RESULT == 'OK') {
                         window.location.reload();
                     } else {
@@ -243,7 +247,5 @@
             })
         }
     }
-
-
 </script>
 @endsection
