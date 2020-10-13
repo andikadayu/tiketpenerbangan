@@ -70,7 +70,9 @@
                 <div class="col-lg-8 align-self-baseline">
                     <p class="text-white-75 font-weight-light mb-5">Tiper adalah sebuah website platform yang memberikan informasi tentang jadwal penerbangan pesawat.</p>
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Pelajari Lebih Lanjut</a>
+                    @if(Session('isLogin()'))
                     <a class="btn btn-secondary btn-xl" href="{{ url('login') }}" style="background-color: #fff; color: #000;">Login</a>
+                    @endif
                 </div>
             </div>
         </div>
