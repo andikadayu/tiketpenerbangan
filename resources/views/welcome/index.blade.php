@@ -120,11 +120,41 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label>Jadwal</label>
-                        <input type="date" name="jadwal" id="select_jadwal" class="form-control" required>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Jadwal</label>
+                                <input type="date" name="jadwal" id="select_jadwal" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Jam Berangkat</label>
+                                <input type="time" name="jam_berangkat" id="jam_berangkat" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Jam Sampai</label>
+                                <input type="time" name="jam_sampai" id="jam_sampai" class="form-control" required>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Stok</label>
+                                <input type="number" name="stok" id="stok" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Tarif</label>
+                                <input type="number" name="tarif" id="tarif" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div class="modal-footer">
@@ -179,9 +209,39 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label>Jadwal</label>
-                        <input type="date" name="jadwal" id="edit_select_jadwal" class="form-control" required>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Jadwal</label>
+                                <input type="date" name="jadwal" id="edit_select_jadwal" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Jam Berangkat</label>
+                                <input type="time" name="jam_berangkat" id="edit_jam_berangkat" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Jam Sampai</label>
+                                <input type="time" name="jam_sampai" id="edit_jam_sampai" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Stok</label>
+                                <input type="number" name="stok" id="edit_stok" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Tarif</label>
+                                <input type="number" name="tarif" id="edit_tarif" class="form-control" required>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -244,7 +304,11 @@
                     $('#edit_select_tujuan').val(data[0].id_bandara_tujuan),
                     $('#edit_select_asal').val(data[0].id_bandara_asal),
                     $('#edit_select_jadwal').val(data[0].tgl_jadwal),
-                    $('#edit_select_pesawat').val(data[0].id_pesawat)
+                    $('#edit_select_pesawat').val(data[0].id_pesawat),
+                    $('#edit_jam_berangkat').val(data[0].jam_berangkat),
+                    $('#edit_jam_sampai').val(data[0].jam_sampai),
+                    $('#edit_stok').val(data[0].stok),
+                    $('#edit_tarif').val(data[0].tarif)
             }
         });
     }
