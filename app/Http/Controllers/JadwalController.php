@@ -16,12 +16,20 @@ class JadwalController extends Controller
         $asal = $request->post('asal');
         $tujuan = $request->post('tujuan');
         $jadwal = $request->post('jadwal');
+        $jam_berangkat = $request->post('jam_berangkat');
+        $jam_sampai = $request->post('jam_sampai');
+        $stok = $request->post('stok');
+        $tarif = $request->post('tarif');
 
         $insert = array();
         $insert['id_pesawat'] = $pesawat;
         $insert['id_bandara_asal'] = $asal;
         $insert['id_bandara_tujuan'] = $tujuan;
         $insert['tgl_jadwal'] = date('Y-m-d', strtotime($jadwal));
+        $insert['jam_berangkat'] = $jam_berangkat;
+        $insert['jam_sampai'] = $jam_sampai;
+        $insert['stok'] = $stok;
+        $insert['tarif'] = $tarif;
 
         $process = $jadwal_model->insert($insert);
 
@@ -54,12 +62,20 @@ class JadwalController extends Controller
         $tujuan = $request->post('tujuan');
         $jadwal = $request->post('jadwal');
         $id = $request->post('id_jadwal');
+        $jam_berangkat = $request->post('jam_berangkat');
+        $jam_sampai = $request->post('jam_sampai');
+        $stok = $request->post('stok');
+        $tarif = $request->post('tarif');
 
         $update = array();
         $update['id_pesawat'] = $pesawat;
         $update['id_bandara_asal'] = $asal;
         $update['id_bandara_tujuan'] = $tujuan;
         $update['tgl_jadwal'] = date('Y-m-d', strtotime($jadwal));
+        $update['jam_berangkat'] = $jam_berangkat;
+        $update['jam_sampai'] = $jam_sampai;
+        $update['stok'] = $stok;
+        $update['tarif'] = $tarif;
 
 
         $process = $jadwal_model->upd($id, $update);
