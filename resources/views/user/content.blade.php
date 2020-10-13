@@ -30,7 +30,7 @@
                 <td>{{ $value->stok }}</td>
                 <td>{{ $value->tarif }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm">Order</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="btnOrder('{{ $value->id_jadwal }}')">Order</button>
                 </td>
             </tr>
             @endforeach

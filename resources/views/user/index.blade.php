@@ -162,6 +162,8 @@
         </div>
     </section>
 
+    <div id="ModalGlobal" class="modal modal-fade" tabindex="-1" role="dialog"></div>
+
     <!-- Footer-->
     <footer class="bg-light py-5">
         <div class="container">
@@ -212,6 +214,28 @@
                 alert('Have an error! Please contact developers');
             });
         });
+
+        function btnOrder(id_jadwal) {
+            $.ajax({
+                url: '{{ url("order") }}',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id_jadwal: id_jadwal
+                },
+                success: function(response) {
+                    if (response.RESULT == 'OK') {
+                        $('#ModalGlobal').html(response.CONTENT);
+                        $('#ModalGlobal').modal('show');
+                    } else {
+                        alert(response.MESSAGE);
+                    }
+                }
+            }).fail(function() {
+                alert('Have an error! Please contact developers');
+            });
+        }
     </script>
 </body>
 

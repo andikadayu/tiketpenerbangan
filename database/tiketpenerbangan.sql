@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2020-10-13 13:11:33
+Date: 2020-10-13 17:56:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,7 +61,7 @@ INSERT INTO `jadwal_penerbangan` VALUES ('2', 'L1233', 'MLG', 'TRK', '2020-09-02
 INSERT INTO `jadwal_penerbangan` VALUES ('4', 'L1233', 'MLG', 'TTE', '2020-09-30', '00:30:00', '01:45:00', '23', '3400000');
 INSERT INTO `jadwal_penerbangan` VALUES ('5', 'G3123', 'SUB', 'TTE', '2020-09-28', '00:00:00', '03:00:00', '74', '890000');
 INSERT INTO `jadwal_penerbangan` VALUES ('6', 'L1233', 'TTE', 'TRK', '2020-09-16', '02:00:00', '05:00:00', '43', '2300000');
-INSERT INTO `jadwal_penerbangan` VALUES ('7', 'G3123', 'BTJ', 'BTJ', '2020-10-01', '14:00:00', '16:00:00', '100', '750000');
+INSERT INTO `jadwal_penerbangan` VALUES ('7', 'G3123', 'BTJ', 'BTJ', '2020-10-01', '14:00:00', '16:00:00', '99', '750000');
 
 -- ----------------------------
 -- Table structure for msuser
@@ -114,8 +114,9 @@ CREATE TABLE `tborder` (
   `jumlah_pesanan` int(11) DEFAULT NULL,
   `tarif` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_order`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tborder
 -- ----------------------------
+INSERT INTO `tborder` VALUES ('4', '2', '7', '2020-10-13 10:38:12', '1', '750000');
