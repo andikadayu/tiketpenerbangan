@@ -35,7 +35,6 @@ class LoginController extends Controller
             if ($msuser->password !== $password) {
                 return JSONResponseDefault(TiketPenerbangan::FAILED, 'Username atau password yang anda masukkan salah');
             }
-
             Session::put('is_login', true);
             Session::put('username', $username);
             Session::put('role', $msuser->role);
