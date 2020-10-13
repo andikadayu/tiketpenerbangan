@@ -10,8 +10,12 @@ class PesawatController extends Controller
 {
     public function index()
     {
+        if (!isAdmin()) {
+            return redirect('dashboard');
+        }
+
         $data = array();
-        $data['pesawat'] = Pesawat::all();
+        $data['pesawat'] = Pesawat::paginate(5);
 
         return view('pesawat.index', $data);
     }

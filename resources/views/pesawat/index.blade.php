@@ -41,6 +41,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $pesawat->links() }}
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Dashboard')
+@section('title', 'Jadwal Penerbangan')
 
 @section('content')
 <div class="row">
@@ -39,7 +39,9 @@
                             <th>Pesawat</th>
                             <th>Bandara Asal</th>
                             <th>Bandara Tujuan</th>
-                            <th>Jadwal</th>
+                            <th>Tanggal Pemberangkatan</th>
+                            <th>Jam Berangkat</th>
+                            <th>Jam Sampai</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -58,6 +60,8 @@
                             <td>{{ $value->bandara_asal }}</td>
                             <td>{{ $value->bandara_tujuan }}</td>
                             <td>{{ date('d F Y', strtotime($value->tgl_jadwal)) }}</td>
+                            <td>{{ $value->jam_berangkat }}</td>
+                            <td>{{ $value->jam_sampai }}</td>
                             <td>
                                 <button class="btn btn-sm btn-warning" onclick="editing(<?= $value->id_jadwal ?>);">Edit</button>
                                 <button class="btn btn-sm btn-danger" onclick="deleting(<?= $value->id_jadwal ?>)">Delete</button>

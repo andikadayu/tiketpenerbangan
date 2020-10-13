@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\JadwalPenerbangan;
 use Illuminate\Http\Request;
+use TiketPenerbangan;
 
 class JadwalController extends Controller
 {
@@ -75,16 +76,40 @@ class JadwalController extends Controller
             ));
         }
     }
-			
-	function delete(Request $request) {
-    	$jadwal_model = new JadwalPenerbangan();
-    	$process = $jadwal_model->del($request->get('id'));
 
-    	if ($process < 0) {
-    		return 'error';
-    	} else {
-    		return 'success';
-    	}
+    function delete(Request $request)
+    {
+        $jadwal_model = new JadwalPenerbangan();
+        $process = $jadwal_model->del($request->get('id'));
 
+        if ($process < 0) {
+            return 'error';
+        } else {
+            return 'success';
+        }
+    }
+
+    public function data_jadwal(Request $request)
+    {
+        $bandara_asal = $request->post('bandara_asal');
+        $bandara_tujuan = $request->post('bandara_tujuan');
+
+        if ($bandara_asal == null || $bandara_tujuan == null) {
+            return JSONResponseDefault(TiketPenerbangan::ERROR, TiketPenerbangan::ERROR);
+        }
+
+        $jadwal = JadwalPenerbangan::select(array('jadwal_penerbangan.*', 'pesawat.nama_pesawat'))
+            ->join('pesawat', 'pesawat.id_pesawat', '=', 'jadwal_penerbangan.id_pesawat')
+            ->where('id_bandara_asal', $bandara_asal)
+            ->where('id_bandara_tujuan', $bandara_tujuan)
+            ->get();
+
+        $data = array();
+        $data['jadwal'] = $jadwal;
+
+        return JSONResponse(array(
+            'RESULT' => TiketPenerbangan::OK,
+            'CONTENT' => view('user.content', $data)->render()
+        ));
     }
 }
